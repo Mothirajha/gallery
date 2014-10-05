@@ -1,0 +1,71 @@
+// console.log("we can log stuff out.");
+ 
+// function add(a, b) {
+//     return a + b;
+// }
+ 
+// console.log("We can execute regular JS too:", add(1, 2));
+ 
+// phantom.exit();
+
+// var page = require("webpage").create();
+// var homePage = "http://www.google.com/";
+// console.log(homePage)
+
+// page.open(homePage);
+// console.log(page)
+// page.onLoadFinished = function(status) {
+//   var url = page.url;
+//   console.log(page.url)
+ 
+//   console.log("Status:  " + status);
+//   console.log("Loaded:  " + url);
+//   page.render("google.png");
+//   phantom.exit();
+// 	};
+
+// var page = require('webpage').create();
+// console.log('The default user agent is ' + page.settings.userAgent);
+// page.settings.userAgent = 'SpecialAgent';
+// page.open('http://www.httpuseragent.org', function (status) {
+//     if (status !== 'success') {
+//         console.log('Unable to access network');
+//     } else {
+//         var ua = page.evaluate(function () {
+//             return document.getElementById('hh').textContent;
+//         });
+//         console.log(ua);
+//     }
+//     phantom.exit();
+// });
+
+
+
+// var page = require('webpage').create();
+ 
+// page.open('http://net.tutsplus.com', function (s) {
+//     console.log(s);
+//     phantom.exit();
+// });
+
+// var page = require('webpage').create();
+// page.open('http://www.sample.com', function() {
+//     page.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
+//         page.evaluate(function() {
+//             $("button").click();
+//         });
+//         phantom.exit()
+//     });
+// });
+
+var page = require('webpage').create();
+page.open('http://net.tutsplus.com', function () {
+    var title = page.evaluate(function () {
+        var posts = document.getElementsByClassName("featured-posts__post-title");
+        posts[0].style.backgroundColor = "#000000";
+        return document.title;
+    });
+    page.clipRect = { top: 0, left: 0, width: 600, height: 700 };
+    page.render(title + ".png");
+    phantom.exit();
+});

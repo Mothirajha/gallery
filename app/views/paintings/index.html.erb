@@ -1,0 +1,11 @@
+<h1> Gallery <h1>
+
+<% @paintings.each do |painting| %>
+  <%= painting.name %>
+  <%= image_tag painting.image_url %>
+<%end%>
+<%= form_for Painting.new do |f| %>
+  <%= f.label :image, "Upload paintings:" %>
+  <%= f.file_field :image, :multiple => true, name: "painting[image]"  %>
+  <%= f.submit %>
+<% end %>
